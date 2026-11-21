@@ -8,6 +8,7 @@ module hashwallet.must.hash_wallet {
     requires net.synedra.validatorfx;
 
     requires javafx.graphics;
+    requires org.hibernate.orm.core;
 
     opens hashwallet.must.hash_wallet to javafx.fxml;
     exports hashwallet.must.hash_wallet;
