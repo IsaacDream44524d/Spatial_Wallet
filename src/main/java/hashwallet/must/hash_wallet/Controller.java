@@ -126,7 +126,7 @@ public class Controller {
             } else if (clickedBtn == withdrawBtn) {
                 actionType = "Withdraw";
             } else {
-                actionType = "";
+                actionType = "Deposit";
             }
 
             FXMLLoader fxmlLoader = new FXMLLoader(

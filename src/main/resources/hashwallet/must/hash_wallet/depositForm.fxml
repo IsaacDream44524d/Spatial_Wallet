@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="300.0" prefWidth="342.0" spacing="18.0" style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.13), 24, 0, 0, 8);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
+<VBox prefHeight="300.0" prefWidth="342.0" spacing="18.0" style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.13), 24, 0, 0, 8);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
 
           <padding>
         <Insets bottom="24" left="24" right="24" top="22" />
@@ -46,7 +46,7 @@
     </VBox>
 
           <!-- Deposit Button -->
-    <Button fx:id="depositBtn" maxWidth="Infinity" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: #1e90ff;                   -fx-text-fill: white;                   -fx-background-radius: 9;                   -fx-font-weight: bold;                   -fx-font-size: 14.5px;                   -fx-cursor: hand;">
+    <Button fx:id="depositBtn" maxWidth="Infinity" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: #1e90ff;                   -fx-text-fill: white;                   -fx-background-radius: 9;                   -fx-font-weight: bold;                   -fx-font-size: 14.5px;                   -fx-cursor: hand;" text="Deposit">
         <font>
             <Font name="System Bold" size="14.5" />
         </font>

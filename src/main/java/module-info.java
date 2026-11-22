@@ -1,6 +1,7 @@
 module hashwallet.must.hash_wallet {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.naming;
 
 
     requires org.controlsfx.controls;

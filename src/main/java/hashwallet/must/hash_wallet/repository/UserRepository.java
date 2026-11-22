@@ -9,7 +9,10 @@ public class UserRepository {
 
 
     public static User retrieveUser(String email) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = (Session) HibernateUtil.getSessionFactory().openSession();
+
+
+
         try (session) {
             return session.createQuery("FROM User WHERE email = :email", User.class)
                     .setParameter("email", email)
