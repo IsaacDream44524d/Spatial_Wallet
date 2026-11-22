@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
    <children>
       <VBox prefHeight="400.0" prefWidth="293.0">
          <children>
-            <ImageView fitHeight="502.0" fitWidth="319.0" pickOnBounds="true">
+            <ImageView fitHeight="520.0" fitWidth="319.0" pickOnBounds="true">
                <image>
                   <Image url="@../../../images/background.jpg" />
                </image>
@@ -34,20 +34,20 @@
          <font>
             <Font size="13.0" />
          </font></Label>
-      <Button fx:id="createAccBtn" alignment="TOP_LEFT" layoutX="349.0" layoutY="367.0" mnemonicParsing="false" onAction="#createAccountPage" prefHeight="49.0" prefWidth="285.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: black;" text="New Account" textFill="WHITE">
+      <Button fx:id="createAccBtn" alignment="TOP_LEFT" layoutX="349.0" layoutY="376.0" mnemonicParsing="false" onAction="#createAccountPage" prefHeight="49.0" prefWidth="285.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: black;" text="New Account" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Region layoutX="602.0" layoutY="382.0" prefHeight="19.0" prefWidth="17.0" style="-fx-background-color: white; -fx-shape: &quot;M 0 0 L 10 5 L 0 10 Z&quot;;" />
-      <Label layoutX="358.0" layoutY="391.0" text="Create a new Spatial wallet" textFill="#beb9b9" />
-      <Button fx:id="logBtn" alignment="TOP_LEFT" layoutX="351.0" layoutY="431.0" mnemonicParsing="false" onAction="#loginPage" prefHeight="49.0" prefWidth="285.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: white; -fx-border-color: grey;" text="Existing Account">
+      <Region layoutX="603.0" layoutY="391.0" prefHeight="19.0" prefWidth="17.0" style="-fx-background-color: white; -fx-shape: &quot;M 0 0 L 10 5 L 0 10 Z&quot;;" />
+      <Label layoutX="358.0" layoutY="401.0" text="Create a new Spatial wallet" textFill="#beb9b9" />
+      <Button fx:id="logBtn" alignment="TOP_LEFT" layoutX="349.0" layoutY="448.0" mnemonicParsing="false" onAction="#loginPage" prefHeight="49.0" prefWidth="285.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: white; -fx-border-color: grey;" text="Existing Account">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label layoutX="361.0" layoutY="456.0" text="Login to access your wallet" textFill="#beb9b9" />
-      <Region layoutX="602.0" layoutY="446.0" prefHeight="19.0" prefWidth="17.0" style="-fx-background-color: black; -fx-shape: &quot;M 0 0 L 10 5 L 0 10 Z&quot;;" />
+      <Label layoutX="358.0" layoutY="473.0" text="Login to access your wallet" textFill="#beb9b9" />
+      <Region layoutX="603.0" layoutY="463.0" prefHeight="19.0" prefWidth="17.0" style="-fx-background-color: black; -fx-shape: &quot;M 0 0 L 10 5 L 0 10 Z&quot;;" />
       <Button fx:id="removeWindowBtn" layoutX="612.0" layoutY="19.0" mnemonicParsing="false" onAction="#removeWindow" style="-fx-background-color: transparent; -fx-border-color: white;" text="X">
          <font>
             <Font size="15.0" />

@@ -21,14 +21,14 @@ The system is developed using Java, with a focus on applying concepts such as en
 
 ## Technologies Used
 
-| Technology | Purpose |
-|---|---|
-| Java | Core application development |
-| JavaFX | Graphical User Interface (GUI) |
+| Technology    | Purpose |
+|---------------|---|
+| Java          | Core application development |
+| JavaFX        | Graphical User Interface (GUI) |
 | Scene Builder | Interface design |
-| CSS | GUI styling |
-| MySQL | Database management |
-| Git & GitHub | Version control and collaboration |
+| CSS           | GUI styling |
+| SQLite        | Database management |
+| Git & GitHub  | Version control and collaboration |
 | IntelliJ IDEA | Development environment |
 
 *Note: Technologies listed should reflect the actual tools and frameworks used in the project.*
@@ -84,7 +84,7 @@ Before running the application, ensure you have:
 - Java Development Kit (JDK) installed.
 - IntelliJ IDEA or another compatible Java IDE.
 - JavaFX SDK and dependencies configured.
-- MySQL Server (if using MySQL).
+- Local SQLite db.
 - Scene Builder (optional, for modifying FXML interfaces).
 
 ### Getting Started

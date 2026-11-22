@@ -22,7 +22,7 @@ public class App extends Application {
                 App.class.getResource("landingPage.fxml")
         );
 
-        Scene scene = new Scene(fxmlLoader.load(), 674, 502);
+        Scene scene = new Scene(fxmlLoader.load(), 674, 520);
 
         // Set window icon
         stage.getIcons().add(new Image(App.class.getResourceAsStream("/images/money.png")));

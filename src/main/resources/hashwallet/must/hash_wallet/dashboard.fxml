@@ -14,16 +14,16 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<VBox fx:id="dashboard" prefWidth="674.0" style="-fx-background-color: #f4f4f5;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
+<VBox fx:id="dashboard" prefWidth="674.0" style="-fx-background-color: #f4f4f5;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
 
-    <!-- ========== TOP SECTION (Light) ========== -->
+    <!--  TOP SECTION (Light) -->
     <AnchorPane prefHeight="260.0" style="-fx-background-color: #ffffff;">
         <children>
 
             <!-- Avatar -->
             <StackPane layoutX="20.0" layoutY="18.0" prefHeight="42.0" prefWidth="42.0">
                 <Circle fill="#3b82f6" radius="21.0" />
-                <Label style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;" text="IS" />
+                <Label fx:id="avatar" style="-fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold;" text="IS" />
             </StackPane>
 
             <!-- Logout -->
@@ -41,13 +41,13 @@
             <!-- Balance -->
             <HBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="98.0" spacing="8">
                 <Label style="-fx-text-fill: #18181b; -fx-font-size: 22px; -fx-font-weight: bold;" text="MKW" />
-                <Label style="-fx-text-fill: #18181b; -fx-font-size: 22px; -fx-font-weight: bold;" text="100,000.00" />
+                <Label fx:id="balance" style="-fx-text-fill: #18181b; -fx-font-size: 22px; -fx-font-weight: bold;" text="100,000.00" />
             </HBox>
 
             <!-- USD equivalent -->
             <HBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="132.0" spacing="6">
                 <Label style="-fx-text-fill: #71717a; -fx-font-size: 13px; -fx-font-weight: bold;" text="USD" />
-                <Label style="-fx-text-fill: #16a34a; -fx-font-size: 13px; -fx-font-weight: bold;" text="57.77" />
+                <Label fx:id="balanceUSD" style="-fx-text-fill: #16a34a; -fx-font-size: 13px; -fx-font-weight: bold;" text="57.77" />
             </HBox>
 
             <!-- Action Buttons -->

@@ -10,7 +10,9 @@ module hashwallet.must.hash_wallet {
 
     requires javafx.graphics;
     requires org.hibernate.orm.core;
+    requires jakarta.persistence;
 
     opens hashwallet.must.hash_wallet to javafx.fxml;
+    opens hashwallet.must.hash_wallet.model to org.hibernate.orm.core;
     exports hashwallet.must.hash_wallet;
 }

@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefWidth="674.0" style="-fx-background-color: #0f0f0f;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
 
@@ -37,22 +38,40 @@
             <Insets bottom="30" left="50" right="50" top="28" />
         </padding>
 
+        <!-- Global error message (Invalid credentials) -->
+        <Label fx:id="errorLabel" alignment="CENTER" managed="false" maxWidth="Infinity" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Invalid credentials" textFill="#d90909" visible="false" />
+
         <!-- Email -->
         <VBox spacing="6">
             <Label style="-fx-text-fill: black; -fx-font-size: 13px; -fx-font-weight: bold;" text="Email" />
             <TextField fx:id="emailField" prefHeight="42.0" promptText="Enter your email" style="-fx-background-color: white;                               -fx-text-fill: black;                               -fx-prompt-text-fill: #71717a;                               -fx-background-radius: 8;                               -fx-border-color: #d4d4d8;                               -fx-border-radius: 8;                               -fx-border-width: 1.2;                               -fx-padding: 0 14 0 14;                               -fx-font-size: 13.5px;" />
+            <Label fx:id="emailLabel" managed="false" text="This field is required" textFill="RED">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
         </VBox>
 
         <!-- Password -->
         <VBox spacing="6">
             <Label style="-fx-text-fill: black; -fx-font-size: 13px; -fx-font-weight: bold;" text="Password" />
             <PasswordField fx:id="passwordField" prefHeight="42" promptText="Enter your password" style="-fx-background-color: white;                                   -fx-text-fill: black;                                   -fx-prompt-text-fill: #71717a;                                   -fx-background-radius: 8;                                   -fx-border-color: #d4d4d8;                                   -fx-border-radius: 8;                                   -fx-border-width: 1.2;                                   -fx-padding: 0 14 0 14;                                   -fx-font-size: 13.5px;" />
+            <Label fx:id="passwordLabel" managed="false" text="This field is required" textFill="RED" visible="false">
+                <font>
+                    <Font name="System Bold" size="13.0" />
+                </font>
+            </Label>
         </VBox>
 
         <!-- Terms -->
         <HBox alignment="CENTER_LEFT" spacing="4" style="-fx-padding: 4 0 8 0;">
             <CheckBox fx:id="termsCheck" style="-fx-text-fill: #a1a1aa; -fx-font-size: 12.5px;" text="By signing in you agree to our" />
             <Hyperlink style="-fx-text-fill: #3b82f6; -fx-font-size: 12.5px; -fx-border-color: transparent;" text="Terms and Conditions" />
+         <Label fx:id="errorLabel" managed="false" text="This field is required" textFill="RED" visible="false">
+            <font>
+               <Font name="System Bold" size="13.0" />
+            </font>
+         </Label>
         </HBox>
 
         <!-- Buttons -->
@@ -61,7 +80,7 @@
 
             <HBox HBox.hgrow="ALWAYS" /> <!-- spacer -->
 
-            <Button onAction="#dashboard" prefHeight="42" prefWidth="150" style="-fx-background-color: #3b82f6;                            -fx-text-fill: white;                            -fx-background-radius: 8;                            -fx-font-weight: bold;                            -fx-font-size: 14px;                            -fx-cursor: hand;" text="Login →" />
+            <Button onAction="#login" prefHeight="42" prefWidth="150" style="-fx-background-color: #3b82f6;                            -fx-text-fill: white;                            -fx-background-radius: 8;                            -fx-font-weight: bold;                            -fx-font-size: 14px;                            -fx-cursor: hand;" text="Login →" />
         </HBox>
     </VBox>
 </VBox>
