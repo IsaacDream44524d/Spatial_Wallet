@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefWidth="674.0" style="-fx-background-color: #0f0f0f;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
+<VBox prefWidth="674.0" style="-fx-background-color: #0f0f0f;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
 
     <!-- Top section: image + close button overlay -->
     <StackPane>
