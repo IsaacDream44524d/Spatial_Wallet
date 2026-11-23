@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="300.0" prefWidth="342.0" spacing="18.0" style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.13), 24, 0, 0, 8);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
+<VBox prefHeight="323.0" prefWidth="377.0" spacing="18.0" style="-fx-background-color: white; -fx-border-color: #e5e7eb; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.13), 24, 0, 0, 8);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
 
-          <padding>
+    <padding>
         <Insets bottom="24" left="24" right="24" top="22" />
     </padding>
 
-          <!-- Header -->
+    <!-- Header -->
     <HBox alignment="CENTER_LEFT" spacing="12">
         <VBox spacing="3" HBox.hgrow="ALWAYS">
             <Label style="-fx-text-fill: #111827;" text="Spatial Card">
@@ -22,10 +22,10 @@
                     <Font name="System Bold" size="17.0" />
                 </font>
             </Label>
-            <Label style="-fx-text-fill: #6b7280; -fx-font-size: 13.5px;" text="Enter your Spatial wallet ID" />
+            <Label fx:id="withdrawHeader" style="-fx-text-fill: #6b7280; -fx-font-size: 13.5px;" text="Enter your Spatial wallet ID" />
         </VBox>
 
-              <!-- Styled Close Button -->
+        <!-- Styled Close Button -->
         <Button onAction="#removeWindow" style="-fx-background-color: #f3f4f6; -fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-font-weight: bold; -fx-background-radius: 50; -fx-min-width: 32; -fx-min-height: 32; -fx-max-width: 32; -fx-max-height: 32; -fx-cursor: hand; -fx-padding: 1;" text="✕">
             <font>
                 <Font size="13.0" />
@@ -33,23 +33,29 @@
         </Button>
     </HBox>
 
-          <!-- Wallet ID Field -->
+    <!-- Wallet ID Field -->
     <VBox spacing="6">
-        <Label style="-fx-text-fill: #374151; -fx-font-size: 12.5px; -fx-font-weight: bold;" text="Wallet ID" />
+        <Label fx:id="agentCode" style="-fx-text-fill: #374151; -fx-font-size: 12.5px; -fx-font-weight: bold;" text="Wallet ID" />
         <TextField fx:id="walletIdField" prefHeight="42" promptText="e.g. ISADRE0145" style="-fx-background-color: #f9fafb;                         -fx-background-radius: 9;                         -fx-border-color: #d1d5db;                         -fx-border-radius: 9;                         -fx-border-width: 1.3;                         -fx-padding: 0 14 0 14;                         -fx-font-size: 13.5px;" />
+
+        <!-- Error label for invalid wallet -->
+        <Label fx:id="walletErrorLabel" managed="false" style="-fx-text-fill: #ef4444; -fx-font-size: 12px;" text="Invalid wallet ID" visible="false" />
     </VBox>
 
-          <!-- Amount Field -->
+    <!-- Amount Field -->
     <VBox spacing="6">
-        <Label style="-fx-text-fill: #374151; -fx-font-size: 12.5px; -fx-font-weight: bold;" text="Deposit Amount" />
+        <Label fx:id="operationLabel" style="-fx-text-fill: #374151; -fx-font-size: 12.5px; -fx-font-weight: bold;" text="Deposit Amount" />
         <TextField fx:id="amountField" prefHeight="42" promptText="0.00" style="-fx-background-color: #f9fafb;                         -fx-background-radius: 9;                         -fx-border-color: #d1d5db;                         -fx-border-radius: 9;                         -fx-border-width: 1.3;                         -fx-padding: 0 14 0 14;                         -fx-font-size: 13.5px;" />
+
+        <!-- Error label for invalid amount -->
+        <Label fx:id="amountErrorLabel" managed="false" style="-fx-text-fill: #ef4444; -fx-font-size: 12px;" text="Invalid amount" visible="false" />
     </VBox>
 
-          <!-- Deposit Button -->
-    <Button fx:id="depositBtn" maxWidth="Infinity" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: #1e90ff;                   -fx-text-fill: white;                   -fx-background-radius: 9;                   -fx-font-weight: bold;                   -fx-font-size: 14.5px;                   -fx-cursor: hand;" text="Deposit">
+    <!-- Deposit Button -->
+    <Button fx:id="depositBtn" maxWidth="Infinity" onAction="#confirmTransaction" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: #1e90ff;                   -fx-text-fill: white;                   -fx-background-radius: 9;                   -fx-font-weight: bold;                   -fx-font-size: 14.5px;                   -fx-cursor: hand;" text="Deposit">
         <font>
             <Font name="System Bold" size="14.5" />
         </font>
     </Button>
 
-      </VBox>
+</VBox>

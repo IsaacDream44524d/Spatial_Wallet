@@ -30,9 +30,9 @@
             <Button layoutX="564.0" layoutY="14.0" mnemonicParsing="false" onAction="#loginPage" prefHeight="32.0" prefWidth="95.0" style="-fx-background-color: #f4f4f5;                            -fx-text-fill: #18181b;                            -fx-font-weight: bold;                            -fx-font-size: 13px;                            -fx-background-radius: 20;                            -fx-cursor: hand;" text="Logout →" />
 
             <!-- Wallet selector -->
-            <MenuButton layoutX="9.0" layoutY="70.0" style="-fx-background-color: transparent;                                -fx-text-fill: #71717a;                                -fx-font-size: 13px;                                -fx-padding: 0;" text="Wallet Balance">
+            <MenuButton layoutX="9.0" layoutY="70.0" onAction="#refreshPage" style="-fx-background-color: transparent;                                -fx-text-fill: #71717a;                                -fx-font-size: 13px;                                -fx-padding: 0;" text="Wallet Balance">
                 <items>
-                    <MenuItem onAction="#dashboard" text="Wallet Balance" />
+                    <MenuItem onAction="#refreshPage" text="Wallet Balance" />
                     <MenuItem onAction="#createAccountPage" text="Create new wallet" />
                     <MenuItem text="Delete wallet" />
                 </items>
@@ -41,13 +41,13 @@
             <!-- Balance -->
             <HBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="98.0" spacing="8">
                 <Label style="-fx-text-fill: #18181b; -fx-font-size: 22px; -fx-font-weight: bold;" text="MKW" />
-                <Label fx:id="balance" style="-fx-text-fill: #18181b; -fx-font-size: 22px; -fx-font-weight: bold;" text="100,000.00" />
+                <Label fx:id="balance" style="-fx-text-fill: #18181b; -fx-font-size: 22px; -fx-font-weight: bold;" />
             </HBox>
 
             <!-- USD equivalent -->
             <HBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="132.0" spacing="6">
                 <Label style="-fx-text-fill: #71717a; -fx-font-size: 13px; -fx-font-weight: bold;" text="USD" />
-                <Label fx:id="balanceUSD" style="-fx-text-fill: #16a34a; -fx-font-size: 13px; -fx-font-weight: bold;" text="57.77" />
+                <Label fx:id="balanceUSD" style="-fx-text-fill: #16a34a; -fx-font-size: 13px; -fx-font-weight: bold;" />
             </HBox>
 
             <!-- Action Buttons -->

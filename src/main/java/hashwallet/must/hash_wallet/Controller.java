@@ -1,7 +1,9 @@
 package hashwallet.must.hash_wallet;
 
 import hashwallet.must.hash_wallet.model.User;
+import hashwallet.must.hash_wallet.model.Wallet;
 import hashwallet.must.hash_wallet.repository.UserRepository;
+import hashwallet.must.hash_wallet.repository.WalletRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -21,26 +21,37 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static hashwallet.must.hash_wallet.repository.UserRepository.retrieveUser;
-import static hashwallet.must.hash_wallet.repository.UserRepository.save;
+import static hashwallet.must.hash_wallet.repository.WalletRepository.retrieveWallet;
 import static hashwallet.must.hash_wallet.service.AuthenticationService.authenticate;
+import static hashwallet.must.hash_wallet.service.WalletService.*;
 
 public class Controller {
+
+    private String loggedInEmail;
+    private Wallet wallet;
 
     @FXML private Button depositBtn;
     @FXML private Button transferBtn;
     @FXML private Button withdrawBtn;
     @FXML private VBox dashboard;
     @FXML private HBox step1Pane;
+    @FXML private Label withdrawHeader;
+    @FXML private Label agentCode;
     @FXML private HBox step2Pane;
     @FXML private HBox step3Pane;
     @FXML private HBox step4Pane;
     @FXML private PasswordField passwordField;
     @FXML private TextField emailField;
     @FXML private Label emailLabel;
-    @FXML Label passwordLabel;
+    @FXML private  Label operationLabel;
+    @FXML private Label passwordLabel;
     @FXML private Label errorLabel;
-    @FXML Label avatar;
+    @FXML private Label avatar;
+    @FXML private Label walletErrorLabel;
+    @FXML private Label amountErrorLabel;
     @FXML private Label  balance;
+    @FXML private TextField walletIdField;
+    @FXML private TextField amountField;
     @FXML private Label balanceUSD;
     @FXML private CheckBox termsCheck;
     @FXML private TextField usernameField;
@@ -54,6 +65,9 @@ public class Controller {
     @FXML private Label confirmPasswordError;
     @FXML private Label depositLabel;
     @FXML private TextField depositField;
+    @FXML private Label cardBalance;
+    @FXML private Label ownerLabel;
+    @FXML private Label walletIDLabel;
 
     @FXML private void removeWindow(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -197,24 +211,48 @@ public class Controller {
         showStep(step3Pane);
     }
 
-    public void setActionType(String actionType) {
+    public void setActionType(String actionType, String buttonId) {
         depositBtn.setText(actionType);
+        operationLabel.setText(actionType + " Amount");
+        setConfirmButtonId(buttonId);
+
+        if (actionType.equalsIgnoreCase("withdraw")) {
+            agentCode.setVisible(false);
+            agentCode.setManaged(false);
+
+            withdrawHeader.setText("Enter the amount you want to withdraw");
+            agentCode.setText("Your wallet ID");
+        }
     }
+
+
 
     @FXML private void openDepositModal(ActionEvent event) {
         try {
             Button clickedBtn = (Button) event.getSource();
 
             String actionType;
+            String buttonId;
 
             if (clickedBtn == depositBtn) {
                 actionType = "Deposit";
+                buttonId = "depositConfirm";
+
             } else if (clickedBtn == transferBtn) {
                 actionType = "Transfer";
+                buttonId = "transferConfirm";
+
             } else if (clickedBtn == withdrawBtn) {
                 actionType = "Withdraw";
+                buttonId = "withdrawConfirm";
+
+
+
             } else {
                 actionType = "Deposit";
+                buttonId = "depositConfirm";
+
+
             }
 
             FXMLLoader fxmlLoader = new FXMLLoader(
@@ -227,18 +265,19 @@ public class Controller {
             Controller controller = fxmlLoader.getController();
 
             // Pass the transaction type
-            controller.setActionType(actionType);
+            controller.setActionType(actionType, buttonId);
+            controller.setLoggedInEmail(loggedInEmail);
 
             Stage modalStage = new Stage();
             modalStage.setScene(new Scene(modalRoot));
             modalStage.initModality(Modality.APPLICATION_MODAL);
             modalStage.initStyle(StageStyle.TRANSPARENT);
             modalStage.setResizable(false);
-            modalStage.initOwner(
-                    ((Node) event.getSource()).getScene().getWindow()
-            );
+            modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
 
             modalStage.showAndWait();
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -267,6 +306,8 @@ public class Controller {
         }
 
         stage.getScene().setRoot(root);
+
+
     }
 
     @FXML private void login(ActionEvent event) {
@@ -302,6 +343,7 @@ public class Controller {
         // login logic goes here
         String email = emailField.getText().trim();
         String password = passwordField.getText();
+        this.loggedInEmail = email;
 
         // System.out.println(email+password);
         boolean isAuthenticated =authenticate(email, password);
@@ -336,12 +378,132 @@ public class Controller {
 
     }
 
+    @FXML public void refreshPage(ActionEvent event) {
+        updateDashboard(loggedInEmail);
+    }
+
+
+    @FXML
+    private void confirmTransaction(ActionEvent event) {
+
+        Button clickedButton = (Button) event.getSource();
+
+        if (!validateForm()) {
+            return;
+        }
+
+        BigDecimal amount = new BigDecimal(amountField.getText().trim());
+        String walletID = walletIdField.getText().trim();
+
+        if (clickedButton.getId().equals("depositConfirm")) {
+
+
+            if (retrieveWallet(walletID) == null) {
+                showError(walletErrorLabel, "Wallet not found");
+                return;
+            }
+
+            boolean deposited = process(walletID, amount, "deposit");
+
+            if (!deposited) {
+                showError(amountErrorLabel, "Deposit failed");
+                return;
+            }
+
+            // Close the modal after a successful deposit
+            Stage stage = (Stage) clickedButton.getScene().getWindow();
+            stage.close();
+
+        } else if (clickedButton.getId().equals("withdrawConfirm")) {
+
+            if (!walletID.equals(walletID)) {
+                showError(walletErrorLabel, "Wallet not found");
+                return;
+            }
+
+            User senderUser = retrieveUser(loggedInEmail);
+
+            if (senderUser == null || senderUser.getWallet() == null) {
+                showError(walletErrorLabel, "Unable to identify sender wallet");
+                return;
+            }
+
+            String senderWalletID = senderUser.getWallet().getWalletNumber();
+
+            boolean withdrawn = process(senderWalletID, amount, "withdraw");
+
+            if (!withdrawn) {
+                showError(amountErrorLabel, "Withdrawal failed. Check your balance.");
+                return;
+            }
+
+            Stage stage = (Stage) clickedButton.getScene().getWindow();
+            stage.close();
+
+
+        } else if (clickedButton.getId().equals("transferConfirm")) {
+
+            if (retrieveWallet(walletID) == null) {
+                showError(walletErrorLabel, "Wallet not found");
+                return;
+            }
+
+            User senderUser = retrieveUser(loggedInEmail);
+
+            if (senderUser == null || senderUser.getWallet() == null) {
+                showError(walletErrorLabel, "Unable to identify sender wallet");
+                return;
+            }
+
+            String senderWalletID = senderUser.getWallet().getWalletNumber();
+            boolean transferred = transfer(senderWalletID, retrieveWallet(walletID).getWalletNumber(), amount);
+
+            if (!transferred) {
+                showError(amountErrorLabel, "Transfer failed");
+                return;
+            }
+
+            // Close the modal after a successful deposit
+            Stage stage = (Stage) clickedButton.getScene().getWindow();
+            stage.close();
+        }
+    }
+
 
     //Helper methods
     private void showError(Label label, String message) {
         label.setText(message);
         label.setVisible(true);
         label.setManaged(true);   // makes it take space
+    }
+
+    @FXML private boolean validateForm() {
+        hideAllErrors();
+        boolean hasError = false;
+
+        try {
+            BigDecimal deposit = new BigDecimal(amountField.getText().trim());
+
+            if (deposit.compareTo(BigDecimal.ZERO) <= 0) {
+                showError(amountErrorLabel, "Amount can not be less than or equal zero");
+                hasError = true;
+            }
+        } catch (NumberFormatException exception) {
+            showError(amountErrorLabel, "Amount MUST be a number");
+            hasError = true;
+        }
+
+        if (walletIdField.getText().isBlank()) {
+            showError(walletErrorLabel, "This field is required");
+            hasError = true;
+        }
+
+
+        return !hasError;
+    }
+
+    public void setConfirmButtonId(String id) {
+        depositBtn.setId(id);
     }
 
     private void hideError(Label label) {
@@ -360,6 +522,8 @@ public class Controller {
         hideError(emailError);
         hideError(passwordError);
         hideError(confirmPasswordError);
+        hideError(amountErrorLabel);
+        hideError(walletErrorLabel);
     }
 
     private void showStep(HBox stepToShow) {
@@ -381,25 +545,27 @@ public class Controller {
 
     private void updateDashboard(String email) {
 
+        this.loggedInEmail = email; // Save email in THIS controller
+
         double exchangeRate = 1733.0;
 
         User user = retrieveUser(email);
 
+        if (user == null) {
+            return;
+        }
+
         String initials = String.valueOf(user.getUsername().charAt(0));
+
         BigDecimal usdAmount = user.getWallet().getBalance().divide(BigDecimal.valueOf(exchangeRate), 2, RoundingMode.HALF_UP);
 
         avatar.setText(initials);
         balance.setText(String.valueOf(user.getWallet().getBalance()));
         balanceUSD.setText(String.valueOf(usdAmount));
+    }
 
-        System.out.println("Avatar: " + avatar);
-        System.out.println("Balance: " + balance);
-        System.out.println("Balance USD: " + balanceUSD);
-
-
-
-
-
+    public void setLoggedInEmail(String email) {
+        this.loggedInEmail = email;
     }
 
     @FXML private void createUser() {
@@ -415,6 +581,18 @@ public class Controller {
 
             if (saved) {
                 goToStep4();
+                User user = retrieveUser(email);
+                Wallet wallet = retrieveWallet(user.getWallet().getWalletNumber());
+
+                String name = user.getUsername();
+                String walletID = wallet.getWalletNumber();
+                BigDecimal balance = wallet.getBalance();
+
+                cardBalance.setText(String.valueOf(balance));
+                ownerLabel.setText(name);
+                walletIDLabel.setText(walletID);
+
+
             } else {
                 showError(depositLabel, "Wallet creation failed, please try again");
 //                System.out.println("User registration failed.");

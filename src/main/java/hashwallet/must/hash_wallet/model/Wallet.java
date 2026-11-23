@@ -52,4 +52,35 @@ public class Wallet {
 
         this.user = user;
     }
+
+    public void deposit(BigDecimal amount) {
+
+        if (amount.compareTo(BigDecimal.ZERO) > 0) {
+
+            this.balance = this.balance.add(amount);
+
+        }
+    }
+
+    public void withdraw(BigDecimal amount) {
+
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than zero");
+        }
+
+        if (amount.compareTo(this.balance) > 0) {
+            throw new IllegalArgumentException("Insufficient funds");
+        }
+
+        this.balance = this.balance.subtract(amount);
+    }
+
+    public void transfer(BigDecimal amount) {
+
+        if (amount.compareTo(this.balance) <= 0) {
+
+            this.balance = this.balance.subtract(amount);
+
+        }
+    }
 }
