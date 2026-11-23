@@ -11,19 +11,27 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="d9eb9517-d354-4393-9315-00babccf590f" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
-        <tools />
-        <mcp-servers />
-      </assistant-state>
       <assistant-state connection-id="d9eb9517-d354-4393-9315-00babccf590f" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
         <tools />
         <mcp-servers />
       </assistant-state>
-      <assistant-state connection-id="9ff6a6da-74df-4255-9243-383c9875d14d" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
+      <assistant-state connection-id="d9eb9517-d354-4393-9315-00babccf590f" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
+        <tools />
+        <mcp-servers />
+      </assistant-state>
+      <assistant-state connection-id="2c56b518-b1cd-479c-b1ed-7734a956eb9d" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
+        <tools />
+        <mcp-servers />
+      </assistant-state>
+      <assistant-state connection-id="2c56b518-b1cd-479c-b1ed-7734a956eb9d" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
         <mcp-servers />
       </assistant-state>
       <assistant-state connection-id="9ff6a6da-74df-4255-9243-383c9875d14d" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
+        <tools />
+        <mcp-servers />
+      </assistant-state>
+      <assistant-state connection-id="9ff6a6da-74df-4255-9243-383c9875d14d" assistant-type="PUBLIC" default-profile-name="" selected-chat-id="" availability="AVAILABLE" acknowledgement="NONE" selected="true">
         <tools />
         <mcp-servers />
       </assistant-state>
@@ -39,26 +47,22 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="d9eb9517-d354-4393-9315-00babccf590f">
-      <console name="Connection1" type="STANDARD" schema="main" session="Main"><![CDATA[DELETE FROM wallets
-WHERE id = 2;]]></console>
-    </connection>
+    <connection id="2c56b518-b1cd-479c-b1ed-7734a956eb9d" />
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="2c56b518-b1cd-479c-b1ed-7734a956eb9d" object-ref="schemas/main/tables/wallets" />
+      <object connection-id="2c56b518-b1cd-479c-b1ed-7734a956eb9d" object-ref="schemas/main/tables/users" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabasePrerequisiteManager">
     <prerequisites />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="d9eb9517-d354-4393-9315-00babccf590f" />
-  </component>
-  <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="d9eb9517-d354-4393-9315-00babccf590f" dataset="main.users" active-filter-id="" />
-    <filter-actions connection-id="d9eb9517-d354-4393-9315-00babccf590f" dataset="main.wallets" active-filter-id="" />
+    <connection id="2c56b518-b1cd-479c-b1ed-7734a956eb9d" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -83,9 +87,9 @@ WHERE id = 2;]]></console>
       </state>
     </states>
     <connections>
-      <connection source-id="" id="d9eb9517-d354-4393-9315-00babccf590f" active="true" signed="true">
+      <connection source-id="" id="2c56b518-b1cd-479c-b1ed-7734a956eb9d" active="true" signed="true">
         <database>
-          <name value="Connection 1" />
+          <name value="Connection" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />

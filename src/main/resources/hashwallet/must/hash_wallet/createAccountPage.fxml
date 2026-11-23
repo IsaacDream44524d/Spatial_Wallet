@@ -16,18 +16,18 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="createAccountForm" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
+<StackPane fx:id="createAccountForm" prefHeight="385.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hashwallet.must.hash_wallet.Controller">
 
     <children>
 
-<!--  STEP 1: PERSONAL DETAILS-->
-        <HBox fx:id="step1Pane" managed="true" prefHeight="502.0" prefWidth="674.0">
+        <!-- ==================== STEP 1: PERSONAL DETAILS ==================== -->
+        <HBox fx:id="step1Pane" managed="true" prefHeight="520.0" prefWidth="700.0">
             <children>
 
                 <!-- LEFT SIDEBAR -->
                 <AnchorPane prefWidth="210.0" style="-fx-background-color: rgba(33, 133, 232, 0.2);">
                     <children>
-                        <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="14.0" layoutY="24.0" preserveRatio="true">
                             <image>
                                 <Image url="@../../../images/money.png" />
                             </image>
@@ -37,7 +37,7 @@
                             <font><Font name="System Bold" size="17.0" /></font>
                         </Label>
 
-                        <!-- Step indicators -->
+                        <!-- Step 1 - Active -->
                         <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="164.0" radius="17.0" strokeWidth="0" />
                         <Label layoutX="21.0" layoutY="150.0" text="✓" textFill="WHITE">
                             <font><Font name="System Bold" size="20.0" /></font>
@@ -48,27 +48,29 @@
 
                         <Line endX="-100" endY="-40" layoutX="131.0" layoutY="235.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
 
+                        <!-- Step 2 - Inactive -->
                         <Circle fill="#b4bac0" layoutX="29.0" layoutY="268.0" radius="17.0" strokeWidth="0" />
-                        <Label layoutX="26.0" layoutY="259.0" text="2" textFill="#605f5f">
+                        <Label layoutX="24.0" layoutY="259.0" text="2" textFill="#605f5f">
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
-                        <Label layoutX="57.0" layoutY="362.0" text="Wallet Details" textFill="#605f5f">
+                        <Label layoutX="54.0" layoutY="259.0" text="Credentials" textFill="#605f5f">
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
 
                         <Line endX="-100" endY="-40" layoutX="128.0" layoutY="342.0" startX="-100" stroke="#b4bac0" strokeWidth="2" />
 
+                        <!-- Step 3 - Inactive -->
                         <Circle fill="#b4bac0" layoutX="29.0" layoutY="372.0" radius="17.0" strokeWidth="0" />
-                        <Label layoutX="25.0" layoutY="363.0" text="3" textFill="#605f5f">
+                        <Label layoutX="24.0" layoutY="363.0" text="3" textFill="#605f5f">
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
-                        <Label layoutX="57.0" layoutY="252.0" prefHeight="32.0" prefWidth="83.0" text="Credential" textFill="#605f5f">
+                        <Label layoutX="54.0" layoutY="363.0" text="Wallet Details" textFill="#605f5f">
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
                     </children>
                 </AnchorPane>
 
-                <!-- RIGHT FORM - DYNAMIC -->
+                <!-- RIGHT FORM -->
                 <VBox spacing="18.0" HBox.hgrow="ALWAYS">
                     <padding>
                         <Insets bottom="24" left="32" right="32" top="24" />
@@ -82,7 +84,7 @@
 
                     <!-- Username -->
                     <VBox spacing="4.0">
-                        <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Username / ID" />
+                        <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Username / ID (OPTIONAL)" />
                         <TextField fx:id="usernameField" prefHeight="42" promptText="Enter 12-character ID" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #1e90ff; -fx-border-radius: 8; -fx-border-width: 1.5;" />
                         <Label style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="This should be 12 characters long" />
                     </VBox>
@@ -92,10 +94,13 @@
                         <VBox spacing="4.0" HBox.hgrow="ALWAYS">
                             <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="First Name" />
                             <TextField fx:id="firstNameField" prefHeight="42" promptText="First Name" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #1e90ff; -fx-border-radius: 8; -fx-border-width: 1.5;" />
+                            <Label fx:id="firstNameError" managed="false" style="-fx-font-size: 12px;" text="This field is required" textFill="RED" visible="false" />
                         </VBox>
+
                         <VBox spacing="4.0" HBox.hgrow="ALWAYS">
                             <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Last Name" />
                             <TextField fx:id="lastNameField" prefHeight="42" promptText="Last Name" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #1e90ff; -fx-border-radius: 8; -fx-border-width: 1.5;" />
+                            <Label fx:id="lastNameError" managed="false" style="-fx-font-size: 12px;" text="This field is required" textFill="RED" visible="false" />
                         </VBox>
                     </HBox>
 
@@ -103,19 +108,15 @@
                         <font><Font name="System Bold" size="13.0" /></font>
                     </Label>
 
-                    <!-- Contact row -->
-                    <HBox spacing="16.0">
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
-                            <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Phone Number" />
-                            <TextField fx:id="phoneField" prefHeight="42" promptText="Your Phone Number" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #1e90ff; -fx-border-radius: 8; -fx-border-width: 1.5;" />
-                        </VBox>
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS">
-                            <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Email Address" />
-                            <TextField fx:id="emailField" prefHeight="42" promptText="Your Email" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #1e90ff; -fx-border-radius: 8; -fx-border-width: 1.5;" />
-                        </VBox>
-                    </HBox>
+                    <!-- Email -->
+                    <VBox spacing="4.0">
+                        <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Email Address" />
+                        <TextField fx:id="emailField" prefHeight="42" promptText="Your Email" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #1e90ff; -fx-border-radius: 8; -fx-border-width: 1.5;" />
+                        <Label fx:id="emailError" managed="false" style="-fx-font-size: 12px;" text="This field is required" textFill="RED" visible="false" />
+                        <Label fx:id="verificationError" managed="false" text="An account with this email already exists. Please sign in." textFill="#e53935" visible="false" wrapText="true" />
+                    </VBox>
 
-                    <VBox VBox.vgrow="ALWAYS" />   <!-- spacer -->
+                    <VBox VBox.vgrow="ALWAYS" />
 
                     <VBox spacing="12">
                         <Line endX="400" startX="0" stroke="#e0e0e0" />
@@ -126,111 +127,103 @@
                 </VBox>
             </children>
         </HBox>
-      <HBox fx:id="step2Pane" layoutX="10.0" layoutY="10.0" managed="true" prefHeight="520.0" prefWidth="700.0" visible="false">
-         <children>
-            <AnchorPane prefWidth="210.0" style="-fx-background-color: rgba(33, 133, 232, 0.2);">
-               <children>
-                  <Circle fill="DODGERBLUE" layoutX="31.0" layoutY="268.0" radius="17.0" strokeWidth="0" />
-                  <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/money.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="16.0" layoutY="100.0" text="Create account">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Label>
-                  <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="164.0" radius="17.0" strokeWidth="0" />
-                  <Label layoutX="21.0" layoutY="150.0" text="✓" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="54.0" layoutY="154.0" text="Personal Details">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Line endX="-100" endY="-40" layoutX="131.0" layoutY="235.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
-                  <Label layoutX="60.0" layoutY="361.0" text="Wallet Details" textFill="#605f5f">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Line endX="-100" endY="-40" layoutX="128.0" layoutY="342.0" startX="-100" stroke="#b4bac0" strokeWidth="2" />
-                  <Circle fill="#b4bac0" layoutX="29.0" layoutY="372.0" radius="17.0" strokeWidth="0" />
-                  <Label layoutX="25.0" layoutY="363.0" text="3" textFill="#605f5f">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="59.0" layoutY="257.0" text="Credentials" textFill="#605f5f">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="22.0" layoutY="253.0" text="✓" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <VBox spacing="18.0" HBox.hgrow="ALWAYS">
-               <padding>
-                  <Insets bottom="24" left="32" right="32" top="24" />
-               </padding>
-               <children>
-                  <Button onAction="#goToStep1" style="-fx-background-color: transparent; -fx-border-color: #1e90ff; -fx-background-radius: 50; -fx-text-fill: #1e90ff; -fx-border-radius: 50; -fx-font-weight: 700; -fx-min-width: 36; -fx-min-height: 36;" text="←" />
-                  <Label text="Create your password">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-                  <VBox spacing="4.0">
-                     <children>
-                        <Label style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="Choose a strong password and keep it safe" />
-                     </children>
-                  </VBox>
-                  <HBox spacing="16.0">
-                     <children>
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <HBox spacing="16.0">
-                     <children>
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <PasswordField promptText="New password" style="-fx-background-color: white; -fx-border-color: #1e90ff; -fx-background-radius: 8; -fx-border-radius: 8;" />
-                  <VBox prefHeight="191.0" prefWidth="426.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <PasswordField prefHeight="17.0" prefWidth="419.0" promptText="Confirm password" style="-fx-background-color: white; -fx-border-color: #1e90ff; -fx-background-radius: 8; -fx-border-radius: 8;" />
-                     </children></VBox>
-                  <VBox spacing="12">
-                     <children>
+
+        <!-- ==================== STEP 2: CREDENTIALS ==================== -->
+        <HBox fx:id="step2Pane" managed="false" prefHeight="520.0" prefWidth="700.0" visible="false">
+            <children>
+
+                <!-- LEFT SIDEBAR -->
+                <AnchorPane prefHeight="389.0" prefWidth="176.0" style="-fx-background-color: rgba(33, 133, 232, 0.2);">
+                    <children>
+                        <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="14.0" layoutY="24.0" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../images/money.png" />
+                            </image>
+                        </ImageView>
+
+                        <Label layoutX="16.0" layoutY="100.0" text="Create account">
+                            <font><Font name="System Bold" size="17.0" /></font>
+                        </Label>
+
+                        <!-- Step 1 - Completed -->
+                        <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="164.0" radius="17.0" strokeWidth="0" />
+                        <Label layoutX="21.0" layoutY="150.0" text="✓" textFill="WHITE">
+                            <font><Font name="System Bold" size="20.0" /></font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="154.0" text="Personal Details">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+
+                        <Line endX="-100" endY="-40" layoutX="131.0" layoutY="235.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
+
+                        <!-- Step 2 - Active -->
+                        <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="268.0" radius="17.0" strokeWidth="0" />
+                        <Label layoutX="21.0" layoutY="253.0" text="✓" textFill="WHITE">
+                            <font><Font name="System Bold" size="20.0" /></font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="259.0" text="Credentials">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+
+                        <Line endX="-100" endY="-40" layoutX="128.0" layoutY="342.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
+
+                        <!-- Step 3 - Inactive -->
+                        <Circle fill="#b4bac0" layoutX="29.0" layoutY="372.0" radius="17.0" strokeWidth="0" />
+                        <Label layoutX="24.0" layoutY="363.0" text="3" textFill="#605f5f">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="363.0" text="Wallet Details" textFill="#605f5f">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+
+                <!-- RIGHT FORM -->
+                <VBox spacing="18.0" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="24" left="32" right="32" top="24" />
+                    </padding>
+
+                    <Button onAction="#goToStep1" style="-fx-background-color: transparent; -fx-border-color: #1e90ff; -fx-background-radius: 50; -fx-text-fill: #1e90ff; -fx-border-radius: 50; -fx-font-weight: 700; -fx-min-width: 36; -fx-min-height: 36;" text="←" />
+
+                    <Label text="Create your password">
+                        <font><Font name="System Bold" size="13.0" /></font>
+                    </Label>
+
+                    <Label style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="Choose a strong password and keep it safe" />
+
+                    <!-- New Password -->
+                    <VBox spacing="4.0">
+                        <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="New Password" />
+                        <PasswordField fx:id="passwordField" prefHeight="42" promptText="New password" style="-fx-background-color: white; -fx-border-color: #1e90ff; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-width: 1.5;" />
+                        <Label fx:id="passwordError" managed="false" style="-fx-font-size: 12px;" text="This field is required" textFill="RED" visible="false" />
+                    </VBox>
+
+                    <!-- Confirm Password -->
+                    <VBox spacing="4.0">
+                        <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Confirm Password" />
+                        <PasswordField fx:id="confirmPasswordField" prefHeight="42" promptText="Confirm password" style="-fx-background-color: white; -fx-border-color: #1e90ff; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-width: 1.5;" />
+                        <Label fx:id="confirmPasswordError" managed="false" style="-fx-font-size: 12px;" text="Passwords do not match" textFill="RED" visible="false" />
+
+                    </VBox>
+
+                    <VBox VBox.vgrow="ALWAYS" />
+
+                    <VBox spacing="12">
                         <Line endX="400" startX="0" stroke="#e0e0e0" />
                         <HBox alignment="CENTER_RIGHT">
-                           <children>
-                              <Button onAction="#goToStep3" prefHeight="51.0" prefWidth="105.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Next →" />
-                           </children>
+                            <Button onAction="#goToStep3" prefHeight="38" prefWidth="110" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Next →" />
                         </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <HBox fx:id="step3Pane" layoutX="10.0" layoutY="10.0" managed="true" prefHeight="520.0" prefWidth="700.0" visible="false">
+                    </VBox>
+                </VBox>
+            </children>
+        </HBox>
+      <HBox fx:id="step3Pane" layoutX="10.0" layoutY="10.0" managed="false" prefHeight="520.0" prefWidth="700.0" visible="false">
          <children>
-            <AnchorPane prefWidth="210.0" style="-fx-background-color: rgba(33, 133, 232, 0.2);">
+            <AnchorPane prefHeight="383.0" prefWidth="167.0" style="-fx-background-color: rgba(33, 133, 232, 0.2);">
                <children>
-                  <Circle fill="DODGERBLUE" layoutX="31.0" layoutY="371.0" radius="17.0" strokeWidth="0" />
-                  <Circle fill="DODGERBLUE" layoutX="31.0" layoutY="268.0" radius="17.0" strokeWidth="0" />
-                  <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="14.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                  <Circle fill="DODGERBLUE" layoutX="27.0" layoutY="363.0" radius="17.0" strokeWidth="0" />
+                  <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="14.0" layoutY="24.0" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/money.png" />
                      </image>
@@ -252,23 +245,24 @@
                      </font>
                   </Label>
                   <Line endX="-100" endY="-40" layoutX="131.0" layoutY="235.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
-                  <Label layoutX="60.0" layoutY="361.0" text="Wallet Details" textFill="#605f5f">
+                  <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="268.0" radius="17.0" strokeWidth="0" />
+                  <Label layoutX="21.0" layoutY="253.0" text="✓" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="54.0" layoutY="259.0" text="Credentials">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
                   <Line endX="-100" endY="-40" layoutX="128.0" layoutY="342.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
-                  <Label layoutX="59.0" layoutY="257.0" text="Credentials" textFill="#605f5f">
+                  <Label layoutX="54.0" layoutY="363.0" text="Wallet Details" textFill="#605f5f">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label layoutX="22.0" layoutY="253.0" text="✓" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="22.0" layoutY="356.0" text="✓" textFill="WHITE">
+                  <Label layoutX="18.0" layoutY="348.0" text="✓" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -280,81 +274,32 @@
                   <Insets bottom="24" left="32" right="32" top="24" />
                </padding>
                <children>
-                  <Button onAction="#goToStep2" style="-fx-background-color: transparent; -fx-border-color: #1e90ff; -fx-background-radius: 50; -fx-text-fill: #1e90ff; -fx-border-radius: 50; -fx-font-weight: 700; -fx-min-width: 36; -fx-min-height: 36;" text="←" />
-                  <Label text="Wallet details">
+                  <Button onAction="#goToStep3" style="-fx-background-color: transparent; -fx-border-color: #1e90ff; -fx-background-radius: 50; -fx-text-fill: #1e90ff; -fx-border-radius: 50; -fx-font-weight: 700; -fx-min-width: 36; -fx-min-height: 36;" text="←" />
+                  <Label text="Wallet Initial Deposit">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
+                  <Label style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="Make an initial deposit to your walletd" />
                   <VBox spacing="4.0">
                      <children>
-                        <Label style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="Your new wallet" />
+                        <Label fx:id="passwordError1" managed="false" style="-fx-font-size: 12px;" text="This field is required" textFill="RED" visible="false" />
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" onAction="#openDepositModal" style="-fx-background-radius: 8; -fx-border-radius: 8;" text="Initial deposit ↗" />
-                  <AnchorPane>
+                  <VBox spacing="4.0">
                      <children>
-                        <VBox>
-                           <children>
-                              <HBox spacing="16.0">
-                                 <children>
-                                    <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                                    <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-                  <HBox spacing="16.0">
-                     <children>
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                        <VBox spacing="4.0" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-                  <VBox prefHeight="191.0" prefWidth="426.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <AnchorPane>
-                           <children>
-                              <Region layoutY="-17.0" prefHeight="189.0" prefWidth="386.0" style="-fx-background-color: navy; -fx-border-color: none; -fx-background-radius: 10; -fx-border-radius: 10;" />
-                              <Label layoutX="14.0" layoutY="-2.0" style="-fx-text-fill: #F2F2F2; -fx-font-size: 11px;" text="Spatial Wallet" />
-                              <Label layoutX="14.0" layoutY="35.0" style="-fx-text-fill: white;" text="Initial balamce" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="14.0" layoutY="68.0" style="-fx-text-fill: white;" text="Wallet ID" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="349.0" layoutY="32.0" style="-fx-text-fill: white;" text="0.0" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="286.0" layoutY="30.0" style="-fx-text-fill: white;" text="MKW" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="289.0" layoutY="75.0" style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="ISADRE0145" />
-                              <Label layoutX="15.0" layoutY="101.0" style="-fx-text-fill: white;" text="Created" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="290.0" layoutY="104.0" style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="21/11/2026" />
-                           </children>
-                        </AnchorPane>
+                        <Label style="-fx-text-fill: #1e90ff; -fx-font-size: 11px; -fx-font-weight: bold;" text="Deposit Amoint (OPTIONAL)" />
+                        <TextField fx:id="depositField" style="-fx-border-color: #1e90ff; -fx-background-color: white; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-width: 1.5;" />
+                        <Label fx:id="depositLabel" managed="false" style="-fx-font-size: 12px;" text="Enter valid number" textFill="RED" visible="false" />
                      </children>
                   </VBox>
+                  <VBox VBox.vgrow="ALWAYS" />
                   <VBox spacing="12">
                      <children>
                         <Line endX="400" startX="0" stroke="#e0e0e0" />
                         <HBox alignment="CENTER_RIGHT">
                            <children>
-                              <Button onAction="#loginPage" prefHeight="35.0" prefWidth="119.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Sign in" />
+                              <Button onAction="#createUser" prefHeight="38" prefWidth="110" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Create Wallet →" />
                            </children>
                         </HBox>
                      </children>
@@ -363,6 +308,117 @@
             </VBox>
          </children>
       </HBox>
+
+        <!-- ==================== STEP 3: WALLET DETAILS ==================== -->
+        <HBox fx:id="step4Pane" managed="false" prefHeight="520.0" prefWidth="700.0" visible="false">
+            <children>
+
+                <!-- LEFT SIDEBAR -->
+                <AnchorPane prefHeight="414.0" prefWidth="177.0" style="-fx-background-color: rgba(33, 133, 232, 0.2);">
+                    <children>
+                        <ImageView fitHeight="62.0" fitWidth="70.0" layoutX="14.0" layoutY="24.0" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../images/money.png" />
+                            </image>
+                        </ImageView>
+
+                        <Label layoutX="16.0" layoutY="100.0" text="Create account">
+                            <font><Font name="System Bold" size="17.0" /></font>
+                        </Label>
+
+                        <!-- Step 1 - Completed -->
+                        <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="164.0" radius="17.0" strokeWidth="0" />
+                        <Label layoutX="21.0" layoutY="150.0" text="✓" textFill="WHITE">
+                            <font><Font name="System Bold" size="20.0" /></font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="154.0" text="Personal Details">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+
+                        <Line endX="-100" endY="-40" layoutX="131.0" layoutY="235.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
+
+                        <!-- Step 2 - Completed -->
+                        <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="268.0" radius="17.0" strokeWidth="0" />
+                        <Label layoutX="21.0" layoutY="253.0" text="✓" textFill="WHITE">
+                            <font><Font name="System Bold" size="20.0" /></font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="259.0" text="Credentials">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+
+                        <Line endX="-100" endY="-40" layoutX="128.0" layoutY="342.0" startX="-100" stroke="DODGERBLUE" strokeWidth="2" />
+
+                        <!-- Step 3 - Active -->
+                        <Circle fill="DODGERBLUE" layoutX="29.0" layoutY="372.0" radius="17.0" strokeWidth="0" />
+                        <Label layoutX="21.0" layoutY="356.0" text="✓" textFill="WHITE">
+                            <font><Font name="System Bold" size="20.0" /></font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="363.0" text="Wallet Details">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+
+                <!-- RIGHT FORM -->
+                <VBox prefHeight="445.0" prefWidth="428.0" spacing="18.0" HBox.hgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="24" left="32" right="32" top="24" />
+                    </padding>
+
+                    <Button onAction="#goToStep2" style="-fx-background-color: transparent; -fx-border-color: #1e90ff; -fx-background-radius: 50; -fx-text-fill: #1e90ff; -fx-border-radius: 50; -fx-font-weight: 700; -fx-min-width: 36; -fx-min-height: 36;" text="←" />
+
+                    <Label text="Wallet details">
+                        <font><Font name="System Bold" size="13.0" /></font>
+                    </Label>
+
+                    <Label style="-fx-text-fill: #868686; -fx-font-size: 11px;" text="Your new wallet" />
+
+                    <!-- Wallet Card -->
+                    <VBox VBox.vgrow="ALWAYS">
+                        <AnchorPane>
+                            <children>
+                                <Region prefHeight="180.0" prefWidth="400.0" style="-fx-background-color: navy; -fx-background-radius: 10;" />
+
+                                <Label layoutX="16.0" layoutY="12.0" style="-fx-text-fill: #F2F2F2; -fx-font-size: 11px;" text="Spatial Wallet" />
+
+                                <Label layoutX="16.0" layoutY="45.0" style="-fx-text-fill: white;" text="Balance">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+
+                                <Label layoutX="280.0" layoutY="41.0" style="-fx-text-fill: white;" text="MKW">
+                                    <font><Font name="System Bold" size="18.0" /></font>
+                                </Label>
+                                <Label fx:id="cardBalance" layoutX="335.0" layoutY="42.0" style="-fx-text-fill: white;" text="0.0">
+                                    <font><Font name="System Bold" size="16.0" /></font>
+                                </Label>
+
+                                <Label layoutX="16.0" layoutY="80.0" style="-fx-text-fill: white;" text="Wallet ID">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="walletIDLabel" layoutX="280.0" layoutY="82.0" style="-fx-text-fill: #868686; -fx-font-size: 12px;" text="ISADRE0145" />
+
+                                <Label layoutX="16.0" layoutY="115.0" style="-fx-text-fill: white;" text="Created">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="createdDateLabel" layoutX="280.0" layoutY="117.0" style="-fx-text-fill: #868686; -fx-font-size: 12px;" text="21/11/2026" />
+                        <Label fx:id="ownerLabel" layoutX="14.0" layoutY="150.0" prefHeight="15.0" prefWidth="335.0" style="-fx-text-fill: #868686; -fx-font-size: 12px;" text="ISAAC DREAM">
+                           <font>
+                              <Font name="Segoe UI Semibold" size="13.0" />
+                           </font>
+                        </Label>
+                            </children>
+                        </AnchorPane>
+                    </VBox>
+
+                    <VBox spacing="12">
+                        <Line endX="400" startX="0" stroke="#e0e0e0" />
+                        <HBox alignment="CENTER_RIGHT">
+                            <Button onAction="#loginPage" prefHeight="38" prefWidth="120" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Sign in" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </children>
+        </HBox>
 
     </children>
 </StackPane>

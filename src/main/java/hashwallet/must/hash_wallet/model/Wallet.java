@@ -2,6 +2,7 @@ package hashwallet.must.hash_wallet.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +15,7 @@ public class Wallet {
     private long ID;
 
     private String walletNumber;
-    private double balance;
+    private BigDecimal balance;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -22,7 +23,7 @@ public class Wallet {
 
     public Wallet() {}
 
-    public Wallet(double balance) {
+    public Wallet(BigDecimal balance) {
         this.balance = balance;
         this.walletNumber = generateWalletNum();
     }
@@ -39,7 +40,7 @@ public class Wallet {
         return walletNumber;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 

@@ -13,8 +13,12 @@
             org.sqlite.JDBC
         </property>
 
+        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.jdbc.batch_size">0</property>
+
+
         <property name="hibernate.connection.url">
-            jdbc:sqlite:./spatialTech.db
+            jdbc:sqlite:./spatialTech.db?busy_timeout=10000&amp;journal_mode=WAL&amp;synchronous=NORMAL
         </property>
 
         <!-- Database dialect -->

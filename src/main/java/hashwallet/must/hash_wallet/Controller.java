@@ -1,7 +1,7 @@
 package hashwallet.must.hash_wallet;
 
 import hashwallet.must.hash_wallet.model.User;
-import hashwallet.must.hash_wallet.service.AuthenticationService;
+import hashwallet.must.hash_wallet.repository.UserRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -19,10 +16,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static hashwallet.must.hash_wallet.repository.UserRepository.retrieveUser;
+import static hashwallet.must.hash_wallet.repository.UserRepository.save;
 import static hashwallet.must.hash_wallet.service.AuthenticationService.authenticate;
 
 public class Controller {
@@ -31,10 +30,10 @@ public class Controller {
     @FXML private Button transferBtn;
     @FXML private Button withdrawBtn;
     @FXML private VBox dashboard;
-    @FXML private StackPane createAccountForm;
     @FXML private HBox step1Pane;
     @FXML private HBox step2Pane;
     @FXML private HBox step3Pane;
+    @FXML private HBox step4Pane;
     @FXML private PasswordField passwordField;
     @FXML private TextField emailField;
     @FXML private Label emailLabel;
@@ -44,8 +43,17 @@ public class Controller {
     @FXML private Label  balance;
     @FXML private Label balanceUSD;
     @FXML private CheckBox termsCheck;
-
-
+    @FXML private TextField usernameField;
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private Label firstNameError;
+    @FXML private Label lastNameError;
+    @FXML private Label emailError;
+    @FXML private Label passwordError;
+    @FXML private Label confirmPasswordError;
+    @FXML private Label depositLabel;
+    @FXML private TextField depositField;
 
     @FXML private void removeWindow(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -79,22 +87,53 @@ public class Controller {
 
     }
 
+    @FXML
+    private void goToStep2() {
 
-    @FXML private void showStep(HBox stepToShow) {
-        // hide all
-        step1Pane.setVisible(false);
-        step1Pane.setManaged(false);
-        step2Pane.setVisible(false);
-        step2Pane.setManaged(false);
-        step3Pane.setVisible(false);
-        step3Pane.setManaged(false);
+        String email = emailField.getText().trim();
+        hideAllErrors();
 
-        // show the one we want
-        stepToShow.setVisible(true);
-        stepToShow.setManaged(true);
-    }
+        boolean hasError = false;
 
-    @FXML private void goToStep2() {
+        if (firstNameField.getText().isBlank()) {
+            showError(firstNameError, "This field is required");
+            hasError = true;
+        }
+
+        if (lastNameField.getText().isBlank()) {
+            showError(lastNameError, "This field is required");
+            hasError = true;
+        }
+
+        if (emailField.getText().isBlank()) {
+            showError(emailError, "This field is required");
+            hasError = true;
+        }
+
+        // Optional: check username length
+        if (!usernameField.getText().isBlank() && usernameField.getText().length() != 12) {
+            // showError(usernameError, "Must be 12 characters");
+            hasError = true;
+        }
+
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            showError(emailError, "Please enter a valid email address.");
+            return;
+        }
+
+        // UI demonstration only: simulate an existing account
+        if (UserRepository.retrieveUser(email) != null) {
+            showError(emailError,
+                    "An account with this email already exists. Please sign in.");
+            return;
+        }
+
+        if (hasError) {
+            return; // stay on step 1
+        }
+
+        // Everything is valid → go to Step 2
         showStep(step2Pane);
     }
 
@@ -102,7 +141,59 @@ public class Controller {
         showStep(step1Pane);
     }
 
-    @FXML private void goToStep3() {
+    @FXML private void goToStep4() {
+
+        hideAllErrors();
+
+        boolean hasError = false;
+
+        if (depositField.getText().isBlank()) {
+            showError(depositLabel, "This field is required");
+            hasError = true;
+        }
+
+        try {
+            BigDecimal deposit = new BigDecimal(depositField.getText().trim());
+
+            if (deposit.compareTo(BigDecimal.ZERO) < 0) {
+                showError(depositLabel, "Deposit can not be less than zero");
+                hasError = true;
+            }
+        } catch (NumberFormatException exception) {
+            showError(depositLabel, "Deposit MUST be a number");
+            hasError = true;
+        }
+
+        if (hasError) {
+            return; // stay on step 2
+        }
+        showStep(step4Pane);
+    }
+
+    @FXML
+    private void goToStep3() {
+        hideAllErrors();
+
+        boolean hasError = false;
+
+        if (passwordField.getText().isBlank()) {
+            showError(passwordError, "This field is required");
+            hasError = true;
+        }
+
+        if (confirmPasswordField.getText().isBlank()) {
+            showError(confirmPasswordError, "This field is required");
+            hasError = true;
+        } else if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+            showError(confirmPasswordError, "Passwords do not match");
+            hasError = true;
+        }
+
+        if (hasError) {
+            return; // stay on step 2
+        }
+
+        // Everything is valid → go to Step 3
         showStep(step3Pane);
     }
 
@@ -254,14 +345,38 @@ public class Controller {
     }
 
     private void hideError(Label label) {
-        label.setVisible(false);
-        label.setManaged(false);  // removes the space
+        if (label != null) {
+            label.setVisible(false);
+            label.setManaged(false);
+        }
     }
 
     private void hideAllErrors() {
         hideError(errorLabel);
         hideError(emailLabel);
         hideError(passwordLabel);
+        hideError(firstNameError);
+        hideError(lastNameError);
+        hideError(emailError);
+        hideError(passwordError);
+        hideError(confirmPasswordError);
+    }
+
+    private void showStep(HBox stepToShow) {
+        step1Pane.setVisible(false);
+        step1Pane.setManaged(false);
+
+        step2Pane.setVisible(false);
+        step2Pane.setManaged(false);
+
+        step3Pane.setVisible(false);
+        step3Pane.setManaged(false);
+
+        step4Pane.setVisible(false);
+        step4Pane.setManaged(false);
+
+        stepToShow.setVisible(true);
+        stepToShow.setManaged(true);
     }
 
     private void updateDashboard(String email) {
@@ -271,12 +386,11 @@ public class Controller {
         User user = retrieveUser(email);
 
         String initials = String.valueOf(user.getUsername().charAt(0));
-        double usdAmount = user.getWallet().getBalance() / exchangeRate;
-        String usdAmountString = String.format("%.2f", usdAmount);
+        BigDecimal usdAmount = user.getWallet().getBalance().divide(BigDecimal.valueOf(exchangeRate), 2, RoundingMode.HALF_UP);
 
         avatar.setText(initials);
         balance.setText(String.valueOf(user.getWallet().getBalance()));
-        balanceUSD.setText(usdAmountString);
+        balanceUSD.setText(String.valueOf(usdAmount));
 
         System.out.println("Avatar: " + avatar);
         System.out.println("Balance: " + balance);
@@ -287,4 +401,29 @@ public class Controller {
 
 
     }
+
+    @FXML private void createUser() {
+
+        String email = emailField.getText().trim();
+        String password = passwordField.getText();
+        String username = firstNameField.getText().trim() + " " + lastNameField.getText().trim();
+
+        BigDecimal amount = new BigDecimal(depositField.getText().trim());
+
+        try {
+            boolean saved = UserRepository.save(email, username, password, amount);
+
+            if (saved) {
+                goToStep4();
+            } else {
+                showError(depositLabel, "Wallet creation failed, please try again");
+//                System.out.println("User registration failed.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
