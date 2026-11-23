@@ -132,6 +132,3 @@ This project was developed for educational purposes under the Object-Oriented Pr
 
 Spatial Wallet is an academic project developed for learning and demonstration purposes. It is not intended to function as a production-ready financial platform or to facilitate real financial transactions.
  
----
-
-**Spatial Wallet — Learning Object-Oriented Programming Through Practical Software Development.**

@@ -76,7 +76,7 @@
 
         <!-- Buttons -->
         <HBox alignment="CENTER_LEFT" spacing="14">
-            <Button prefHeight="42" prefWidth="160" style="-fx-background-color: transparent;                            -fx-text-fill: black;                            -fx-border-color: #3f3f46;                            -fx-border-radius: 8;                            -fx-background-radius: 8;                            -fx-border-width: 1.3;                            -fx-font-size: 13.5px;                            -fx-cursor: hand;" text="Request Audit" />
+            <Button onAction="#showTotalBalances" prefHeight="42" prefWidth="160" style="-fx-background-color: transparent;                            -fx-text-fill: black;                            -fx-border-color: #3f3f46;                            -fx-border-radius: 8;                            -fx-background-radius: 8;                            -fx-border-width: 1.3;                            -fx-font-size: 13.5px;                            -fx-cursor: hand;" text="Request Audit" />
 
             <HBox HBox.hgrow="ALWAYS" /> <!-- spacer -->
 

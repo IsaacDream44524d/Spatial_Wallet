@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static hashwallet.must.hash_wallet.repository.UserRepository.retrieveUser;
+import static hashwallet.must.hash_wallet.repository.WalletRepository.getTotalBalance;
 import static hashwallet.must.hash_wallet.repository.WalletRepository.retrieveWallet;
 import static hashwallet.must.hash_wallet.service.AuthenticationService.authenticate;
 import static hashwallet.must.hash_wallet.service.WalletService.*;
@@ -68,10 +69,25 @@ public class Controller {
     @FXML private Label cardBalance;
     @FXML private Label ownerLabel;
     @FXML private Label walletIDLabel;
+    @FXML private Label totalBalanceLabel;
 
     @FXML private void removeWindow(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    @FXML private void showTotalBalances(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("audit.fxml"));
+        Parent root = loader.load();
+
+        Controller auditController = loader.getController();
+
+        String total = String.valueOf(WalletRepository.getTotalBalance());
+        auditController.totalBalanceLabel.setText(total);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
     }
 
     @FXML public void createAccountPage(ActionEvent event) throws IOException {

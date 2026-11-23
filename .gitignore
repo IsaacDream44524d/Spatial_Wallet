@@ -41,3 +41,7 @@ thumbs.db
 .log
 
 .env
+
+.db
+.db-shm
+.db-wal
