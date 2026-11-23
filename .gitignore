@@ -42,6 +42,12 @@ thumbs.db
 
 .env
 
-.db
-.db-shm
-.db-wal
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Database backups
+*.db-journal
+*.sqlite-shm
+*.sqlite-wal
